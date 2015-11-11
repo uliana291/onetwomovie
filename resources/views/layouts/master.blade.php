@@ -14,7 +14,12 @@
 <body>
 <div class="container">
     <nav class="navbar navbar-default">
-        <!-- Navbar Contents -->
+        <a class="navbar-brand" href="auth/login">OneTwoMovie</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="auth/register">Register</a>
+            </li>
+        </ul>
     </nav>
 </div>
 
