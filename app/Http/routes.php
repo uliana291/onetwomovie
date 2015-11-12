@@ -14,7 +14,10 @@
 
 Route::get('/', function () {
 
-    return view('auth.login');
+    if (Auth::check())
+        return view('welcome');
+    else
+        return view('auth.login');
 });
 
 
@@ -26,5 +29,10 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::controllers([
-  'password' => 'Auth\PasswordController',
+    'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('/welcome', function () {
+
+    return view('welcome');
+});
