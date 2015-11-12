@@ -21,7 +21,7 @@
         @if ( !Auth::check())
             <ul class="nav navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/auth/register">Register</a>
+                    <a class="nav-link" href="/auth/register">Регистрация</a>
                 </li>
             </ul>
         @endif

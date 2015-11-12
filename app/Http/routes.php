@@ -38,4 +38,5 @@ Route::get('/welcome', function () {
 });
 
 
-Route::get('user/{id}/profile', 'Profile\ProfilesController@showProfile');
+Route::get('user', 'Profile\ProfilesController@showProfile');
+Route::post('user', 'Profile\ProfilesController@showProfile');
