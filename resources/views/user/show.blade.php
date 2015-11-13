@@ -36,6 +36,7 @@
                             </div>
                         </div>
 
+                        @if ($city <> null )
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right; ">
@@ -46,6 +47,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         @if ($user->age != 0)
                             <div class="form-group">
