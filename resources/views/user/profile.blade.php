@@ -10,13 +10,13 @@
                     <div class="panel-heading">Ваш Профиль</div>
                     <div class="panel-body" style="padding:10px 40px;">
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
+                        {!! Form::open(array('class' => 'form-horizontal', 'files' => true)) !!}
 
                         {!! Form::token() !!}
 
 
                         @include('errors.error')
-
+                        
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right; ">
@@ -46,6 +46,17 @@
                                 </div>
                                 <div class="col-md-9">
                                     {!!  Form::select('city_id', $cityList ,$user->city_id, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right; ">
+                                    {!! Form::label('ava','Загрузка аватара', array('class' => 'control-label') ) !!}
+                                </div>
+                                <div class="col-md-9">
+                                    {!! Form::file('ava', null, array('class' => 'form-control')) !!}
                                 </div>
                             </div>
                         </div>
@@ -120,7 +131,8 @@
                         <div class="form-group">
                             <div class="row">
                                 <div style="text-align: right; ">
-                                    <button type="submit" class="btn btn-primary" style="margin-right: 15px; width: 150px;">
+                                    <button type="submit" class="btn btn-primary"
+                                            style="margin-right: 15px; width: 150px;">
                                         Save
                                     </button>
                                 </div>

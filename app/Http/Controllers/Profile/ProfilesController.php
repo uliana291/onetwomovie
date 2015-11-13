@@ -8,7 +8,8 @@ use App\Cities;
 use Validator;
 use Illuminate\Http\Request;
 
-class ProfilesController extends Controller {
+class ProfilesController extends Controller
+{
 
 
     public function __construct()
@@ -17,27 +18,14 @@ class ProfilesController extends Controller {
     }
 
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'last_name'=> 'required|max:255',
-            'email' => 'required|email|max:255',
-            'city_id' => 'required',
-            'status' => 'required|in:enable,disable',
-            'birth_date' => 'required|date'
-        ]);
-    }
-
-
     public function showProfile(Request $request)
     {
         $user = User::find($request->user()->id);
 
-        $cities = Cities::where('country_id','=',1)->limit(300)->get();
+        $cities = Cities::where('country_id', '=', 1)->limit(300)->get();
 
         $cityList = [];
-        foreach($cities as $key => $value) {
+        foreach ($cities as $key => $value) {
             $cityList[$value->id] = $value->city;
         }
 
@@ -46,6 +34,15 @@ class ProfilesController extends Controller {
 
     public function saveProfile(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'city_id' => 'required',
+            'birth_date' => 'required|date',
+            'ava' => 'mimes:png,jpeg'
+        ]);
+
         $user = User::find($request->user()->id);
 
         $user->name = $request->input('name');
@@ -54,7 +51,7 @@ class ProfilesController extends Controller {
 
         $user->city_id = $request->input('city_id');
 
-        $user->status = $request->input('status');
+        $user->status = ($request->input('status') == null ? "disable" : "enable");
 
         $user->birth_date = $request->input('birth_date');
 
@@ -64,7 +61,22 @@ class ProfilesController extends Controller {
 
         $user->vk = $request->input('vk');
 
+        if ($request->file('ava') <> null) {
+
+            $imageName = $user->id . '.' .
+                $request->file('ava')->getClientOriginalExtension();
+
+            $user->ava = $imageName;
+
+            $request->file('ava')->move(
+                base_path() . '/public/upload/', $imageName
+            );
+
+        }
         $user->save();
+
+        return redirect()->back()->with('error', 0)->with('message', 'Профиль успешно обновлен.');
+
     }
 
 

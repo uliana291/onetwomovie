@@ -1,11 +1,15 @@
 
-    @if (count($errors) > 0)
+    @if(session()->has('error'))
+        @if(session()->get('error') == 1)
+            <div class="alert alert-danger">{!! session()->get('message') !!}</div>
+        @else
+            <div class="alert alert-success">{!! session()->get('message') !!}</div>
+        @endif
+    @endif
+    @if(count($errors->all()) > 0)
         <div class="alert alert-danger">
-            <strong>Уупс!</strong> Возникла ошибка ввода.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            @foreach ($errors->all() as $error)
+                {{ $error }}
+            @endforeach
         </div>
     @endif
