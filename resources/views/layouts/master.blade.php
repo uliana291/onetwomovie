@@ -26,6 +26,14 @@
             </ul>
         @endif
 
+        @if ( Auth::check())
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Профиль</a>
+                </li>
+            </ul>
+        @endif
+
     </nav>
 </div>
 

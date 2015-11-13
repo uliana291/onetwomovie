@@ -37,6 +37,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('user/{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
 
-Route::get('user', 'Profile\ProfilesController@showProfile');
-Route::post('user', 'Profile\ProfilesController@saveProfile');
+
+Route::get('user/edit', 'Profile\ProfilesController@editProfile');
+Route::post('user/edit', 'Profile\ProfilesController@saveProfile');

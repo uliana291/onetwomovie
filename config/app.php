@@ -147,6 +147,7 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -179,6 +180,7 @@ return [
         'Gate'      => Illuminate\Support\Facades\Gate::class,
         'Hash'      => Illuminate\Support\Facades\Hash::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'Image'     => Intervention\Image\Facades\Image::class,
         'Input'     => Illuminate\Support\Facades\Input::class,
         'Inspiring' => Illuminate\Foundation\Inspiring::class,
         'Lang'      => Illuminate\Support\Facades\Lang::class,

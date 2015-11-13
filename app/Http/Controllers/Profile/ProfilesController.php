@@ -7,6 +7,8 @@ use App\User;
 use App\Cities;
 use Validator;
 use Illuminate\Http\Request;
+use DataTime;
+use Image;
 
 class ProfilesController extends Controller
 {
@@ -17,8 +19,46 @@ class ProfilesController extends Controller
         $this->middleware('auth');
     }
 
+    public function ageCalculator($dob)
+    {
+        if (!empty($dob)) {
+            $birthdate = new \DateTime($dob);
+            $today = new \DateTime('today');
+            $age = $birthdate->diff($today)->y;
+            return $age;
+        } else {
+            return 0;
+        }
+    }
 
-    public function showProfile(Request $request)
+    public function showProfile(Request $request, $id = null)
+    {
+        $user = User::find(($id != null ? $id : $request->user()->id));
+
+        if ($user <> null) {
+            $city = Cities::find($user->city_id);
+
+            $user->age = $this->ageCalculator($user->birth_date);
+
+
+            if ($user->ava <> null) {
+                $img = $user->ava;
+                $user->ava = '/upload/' . $img;
+            }
+
+            if ($user->id == $request->user()->id)
+                $user->self = true;
+            else
+                $user->self = false;
+
+            return view()->make('user.show', array('user' => $user, 'city' => $city));
+        } else {
+            return view()->make('error.access_denied');
+        }
+    }
+
+
+    public function editProfile(Request $request)
     {
         $user = User::find($request->user()->id);
 
@@ -29,7 +69,7 @@ class ProfilesController extends Controller
             $cityList[$value->id] = $value->city;
         }
 
-        return view()->make('user.profile', array('user' => $user, 'cityList' => $cityList));
+        return view()->make('user.edit', array('user' => $user, 'cityList' => $cityList));
     }
 
     public function saveProfile(Request $request)
@@ -61,6 +101,8 @@ class ProfilesController extends Controller
 
         $user->vk = $request->input('vk');
 
+        $user->mobile_number = $request->input('mobile_number');
+
         if ($request->file('ava') <> null) {
 
             $imageName = $user->id . '.' .
@@ -71,6 +113,14 @@ class ProfilesController extends Controller
             $request->file('ava')->move(
                 base_path() . '/public/upload/', $imageName
             );
+
+            $img = \Image::make(base_path() . '/public/upload/' . $imageName);
+
+            $img->resize(200, null, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save();
+            $img->crop(200, 200, 0, 0)->save();
+
 
         }
         $user->save();

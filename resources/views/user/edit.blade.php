@@ -16,7 +16,7 @@
 
 
                         @include('errors.error')
-                        
+
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right; ">
@@ -109,6 +109,17 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right; ">
+                                    {!!  Form::label('mobile_number', 'Телефон', array('class' => 'control-label')) !!}
+                                </div>
+                                <div class="col-md-9">
+                                    {!!  Form::text('mobile_number', $user->mobile_number, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right; ">
                                     {!!  Form::label('skype', 'Skype', array('class' => 'control-label')) !!}
                                 </div>
                                 <div class="col-md-9">
@@ -133,7 +144,7 @@
                                 <div style="text-align: right; ">
                                     <button type="submit" class="btn btn-primary"
                                             style="margin-right: 15px; width: 150px;">
-                                        Save
+                                        Сохранить
                                     </button>
                                 </div>
                             </div>
