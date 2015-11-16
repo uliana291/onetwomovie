@@ -147,7 +147,9 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+
+        Barryvdh\Debugbar\ServiceProvider::class
     ],
 
     /*

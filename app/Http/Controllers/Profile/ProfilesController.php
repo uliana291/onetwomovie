@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Profile;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Cities;
+use App\Helper;
 use Validator;
 use Illuminate\Http\Request;
 use DataTime;
@@ -19,17 +20,6 @@ class ProfilesController extends Controller
         $this->middleware('auth');
     }
 
-    public function ageCalculator($dob)
-    {
-        if (!empty($dob)) {
-            $birthdate = new \DateTime($dob);
-            $today = new \DateTime('today');
-            $age = $birthdate->diff($today)->y;
-            return $age;
-        } else {
-            return 0;
-        }
-    }
 
     public function showProfile(Request $request, $id = null)
     {
@@ -38,7 +28,7 @@ class ProfilesController extends Controller
         if ($user <> null) {
             $city = Cities::find($user->city_id);
 
-            $user->age = $this->ageCalculator($user->birth_date);
+            $user->age = Helper::ageCalculator($user->birth_date);
 
 
             if ($user->ava <> null) {
@@ -88,6 +78,8 @@ class ProfilesController extends Controller
         $user->name = $request->input('name');
 
         $user->last_name = $request->input('last_name');
+
+        $user->gender = $request->input('gender');
 
         $user->city_id = $request->input('city_id');
 

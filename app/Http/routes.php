@@ -39,6 +39,7 @@ Route::get('/welcome', function () {
 
 Route::get('user/{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
 
+Route::get('search/users', 'Search\SearchController@getList');
 
 Route::get('user/edit', 'Profile\ProfilesController@editProfile');
 Route::post('user/edit', 'Profile\ProfilesController@saveProfile');

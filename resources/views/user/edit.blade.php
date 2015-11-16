@@ -42,6 +42,17 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-md-3" style="text-align: right; ">
+                                    {!!  Form::label('gender', 'Пол', array('class' => 'control-label')) !!}
+                                </div>
+                                <div class="col-md-9">
+                                    {!!  Form::select('gender',array('male' => 'М', 'female' => 'Ж'), $user->gender, array('class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right; ">
                                     {!!  Form::label('city_id', 'Город', array('class' => 'control-label')) !!}
                                 </div>
                                 <div class="col-md-9">
@@ -152,6 +163,7 @@
 
 
                         {!! Form::close() !!}
+
                     </div>
                 </div>
             </div>

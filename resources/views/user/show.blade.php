@@ -29,7 +29,6 @@
                         @endif
 
 
-
                         <div class="form-group">
                             <div class="row">
                                 {{($user->status == "enable"? "Хочу в кино" : "Пока не хочу в кино")}}
