@@ -37,6 +37,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/api/getImage/{id}-{width}x{height}.jpg','Profile\ProfilesController@getImage');
+
 Route::get('user/{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
 
 Route::get('search/users', 'Search\SearchController@getList');

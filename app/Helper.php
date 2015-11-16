@@ -2,6 +2,9 @@
 
 namespace App;
 
+use Illuminate\Http\Response;
+use Image;
+
 class Helper
 {
     public static function ageCalculator($dob)

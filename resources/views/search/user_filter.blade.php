@@ -64,13 +64,13 @@
             <div class="col-md-3" style="text-align: right; ">
                 {!! Form::label('user_name', $value->name, array('class' => 'control-label'))  !!}
             </div>
-            <div class="col-md-2">
-                <img src="{{ $value->ava }}" alt="Фото профиля">
+            <div class="col-md-4">
+                <img src="/api/getImage/{{$value->id}}-50x50.jpg" alt="Фото профиля">
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 {!! Form::label('user_gender', ($value->gender == 'female'? 'Ж' : 'М'), array('class' => 'control-label'))  !!}
             </div>
-            <div class="col-md-2" style="text-align: center">
+            <div class="col-md-1" style="text-align: center">
                 {!! Form::label('user_age', $value->age, array('class' => 'control-label'))  !!}
             </div>
             <div class="col-md-3">

@@ -121,6 +121,20 @@ class ProfilesController extends Controller
 
     }
 
+    public static function getImage($id, $width, $height) {
+        $user = User::find($id);
+        $img = Image::make(public_path("upload/".$user->ava));
+
+        $img->resize($width, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+        $img->crop($width, $height, 0, 0);
+
+        $response = response()->make($img->encode('png'));
+        $response->header('Content-Type', 'image/png');
+        return $response;
+    }
+
 
 }
 
