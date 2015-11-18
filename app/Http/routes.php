@@ -20,28 +20,58 @@ Route::get('/', function () {
         return view('auth.login');
 });
 
-
-Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', 'Auth\AuthController@postLogin');
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
-
-Route::get('auth/register', 'Auth\AuthController@getRegister');
-Route::post('auth/register', 'Auth\AuthController@postRegister');
-
-Route::controllers([
-    'password' => 'Auth\PasswordController',
-]);
-
 Route::get('/welcome', function () {
 
     return view('welcome');
 });
 
-Route::get('/api/getImage/{id}-{width}x{height}.jpg','Profile\ProfilesController@getImage');
 
-Route::get('user/{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
 
-Route::get('search/users', 'Search\SearchController@getList');
+Route::group(['prefix' => 'auth'], function () {
 
-Route::get('user/edit', 'Profile\ProfilesController@editProfile');
-Route::post('user/edit', 'Profile\ProfilesController@saveProfile');
+    Route::get('login', 'Auth\AuthController@getLogin');
+    Route::post('login', 'Auth\AuthController@postLogin');
+    Route::get('logout', 'Auth\AuthController@getLogout');
+
+    Route::get('register', 'Auth\AuthController@getRegister');
+    Route::post('register', 'Auth\AuthController@postRegister');
+});
+
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('edit', 'Profile\ProfilesController@editProfile');
+    Route::post('edit', 'Profile\ProfilesController@saveProfile');
+
+    Route::get('{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
+});
+
+Route::group(['prefix' => 'user'], function () {
+    Route::get('edit', 'Profile\ProfilesController@editProfile');
+    Route::post('edit', 'Profile\ProfilesController@saveProfile');
+
+    Route::get('{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
+});
+
+
+Route::group(['prefix' => '/api'], function () {
+
+
+    Route::get('get{type}','ApiController@getStaticValues')->where('type', 'Cities|Genres');
+    Route::get('get{type}','ApiController@getDynamicValues')->where('type', 'Cinemas|Seances|Movies');
+    Route::get('getImage/{id}-{width}x{height}.jpg','ApiController@getImage');
+
+
+});
+
+
+Route::controllers([
+    'password' => 'Auth\PasswordController',
+]);
+
+Route::group(['prefix' => 'search'], function () {
+
+    Route::get('users', 'Search\SearchController@getList');
+
+});
+
+

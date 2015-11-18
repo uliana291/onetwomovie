@@ -26,9 +26,13 @@ class ProfilesController extends Controller
         $user = User::find(($id != null ? $id : $request->user()->id));
 
         if ($user <> null) {
-            $city = Cities::find($user->city_id);
+            if ($user->city_id <> 0)
+                $city = Cities::find($user->city_id);
+            else
+                $city = null;
 
-            $user->age = Helper::ageCalculator($user->birth_date);
+            if ($user->birth_date <> "0000-00-00")
+                $user->age = Helper::ageCalculator($user->birth_date);
 
 
             if ($user->ava <> null) {
@@ -52,7 +56,7 @@ class ProfilesController extends Controller
     {
         $user = User::find($request->user()->id);
 
-        $cities = Cities::where('country_id', '=', 1)->limit(300)->get();
+        $cities = Cities::orderBy('city')->get();
 
         $cityList = [];
         foreach ($cities as $key => $value) {
@@ -73,34 +77,16 @@ class ProfilesController extends Controller
             'ava' => 'mimes:png,jpeg'
         ]);
 
-        $user = User::find($request->user()->id);
+        $arrayData = array_only($request->all(),['name','last_name','gender','city_id','status','birth_date','about','skype','vk','mobile_number']);
 
-        $user->name = $request->input('name');
-
-        $user->last_name = $request->input('last_name');
-
-        $user->gender = $request->input('gender');
-
-        $user->city_id = $request->input('city_id');
-
-        $user->status = ($request->input('status') == null ? "disable" : "enable");
-
-        $user->birth_date = $request->input('birth_date');
-
-        $user->about = $request->input('about');
-
-        $user->skype = $request->input('skype');
-
-        $user->vk = $request->input('vk');
-
-        $user->mobile_number = $request->input('mobile_number');
+        $arrayData['status'] = ($request->input('status') == null ? "disable" : "enable");
 
         if ($request->file('ava') <> null) {
 
-            $imageName = $user->id . '.' .
+            $imageName = $request->user()->id . '.' .
                 $request->file('ava')->getClientOriginalExtension();
 
-            $user->ava = $imageName;
+            $arrayData['ava'] = $imageName;
 
             $request->file('ava')->move(
                 base_path() . '/public/upload/', $imageName
@@ -112,29 +98,13 @@ class ProfilesController extends Controller
                 $constraint->aspectRatio();
             })->save();
             $img->crop(200, 200, 0, 0)->save();
-
-
         }
-        $user->save();
+
+        User::where("id",$request->user()->id)->update($arrayData);
 
         return redirect()->back()->with('error', 0)->with('message', 'Профиль успешно обновлен.');
 
     }
-
-    public static function getImage($id, $width, $height) {
-        $user = User::find($id);
-        $img = Image::make(public_path("upload/".$user->ava));
-
-        $img->resize($width, null, function ($constraint) {
-            $constraint->aspectRatio();
-        });
-        $img->crop($width, $height, 0, 0);
-
-        $response = response()->make($img->encode('png'));
-        $response->header('Content-Type', 'image/png');
-        return $response;
-    }
-
 
 }
 

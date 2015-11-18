@@ -39,7 +39,7 @@ class SearchController extends Controller
 
         $users = $users->get();
 
-        $cities = Cities::where('country_id', '=', 1)->limit(300)->get();
+        $cities = Cities::orderBy('city')->get();
 
         $cityList = [];
         $cityList[0] = 'Любой';
