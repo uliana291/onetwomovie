@@ -52,4 +52,8 @@ class Movies extends Model
 
         $movies->save();
     }
+
+    public function getGenres() {
+       return $this->hasMany("\App\MoviesGenres","movie_id","id")->with("getGenre");
+    }
 }

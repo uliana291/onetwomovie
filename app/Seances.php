@@ -23,4 +23,13 @@ class Seances extends Model
 
         $seances->save();
     }
+
+    public function getMovie() {
+        return $this->hasOne("\App\Movies","id","movie_id");
+    }
+
+    public function getCinema() {
+        return $this->hasOne("\App\Cinemas","id","cinema_id");
+    }
+
 }

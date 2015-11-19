@@ -10,4 +10,8 @@ class MoviesGenres extends Model
     protected $table = "movies_genres";
     public $timestamps = false;
 
+    public function getGenre() {
+        return $this->hasOne("\App\Genres","id","genre_id");
+    }
+
 }

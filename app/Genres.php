@@ -16,4 +16,6 @@ class Genres extends Model
 
         $genres->save();
     }
+
+
 }

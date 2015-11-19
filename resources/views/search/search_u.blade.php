@@ -6,7 +6,9 @@
 
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Поиск пользователей</div>
+                    <div class="panel-heading">Поиск пользователей |
+                        <a style="text-align: right" href="/search/movies">Поиск фильмов</a>
+                    </div>
                     <div class="panel-body" style="padding:10px 40px;">
 
                         @yield('filter')

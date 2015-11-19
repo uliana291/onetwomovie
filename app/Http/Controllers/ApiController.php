@@ -17,7 +17,7 @@ class ApiController extends Controller
     {
         // TODO: if file not exist make no avatar image
         $user = User::find($id);
-       // if(is_null($user)) {
+        // if(is_null($user)) {
 
         //}
 
@@ -33,6 +33,30 @@ class ApiController extends Controller
         return $response;
     }
 
+    public static function getPoster($link, $width = 200, $height = 0)
+    {
+
+        if (file_exists(base_path() . '/public/upload/'. $link)) {
+
+            $img = Image::make(base_path() . '/public/upload/'. $link);
+
+        } else {
+            $original_name = $link;
+            $link = \App\Helper::getPosterLink($link);
+            $img = Image::make($link);
+
+            $img->resize($width, null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $img->save(base_path() . '/public/upload/'. $original_name);
+        }
+
+        $response = response()->make($img->encode('jpg'));
+        $response->header('Content-Type', 'image/jpg');
+
+        return $response;
+    }
 
 
     public static function getStaticValues($type)
