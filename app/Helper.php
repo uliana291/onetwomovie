@@ -9,13 +9,13 @@ class Helper
 {
     public static function ageCalculator($dob)
     {
-        if (!empty($dob)) {
+        if ($dob != '0000-00-00') {
             $birthdate = new \DateTime($dob);
             $today = new \DateTime('today');
             $age = $birthdate->diff($today)->y;
             return $age;
         } else {
-            return 0;
+            return null;
         }
     }
 

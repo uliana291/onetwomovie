@@ -13,7 +13,7 @@ class AddGenderToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('gender', ['female', 'male']);
+            $table->enum('gender', ['female', 'male'])->default('male');
         });
     }
 

@@ -60,7 +60,7 @@ Route::group(['prefix' => '/api'], function () {
     Route::get('get{type}','ApiController@getDynamicValues')->where('type', 'Cinemas|Seances|Movies');
     Route::get('getImage/{id}-{width}x{height}.jpg','ApiController@getImage')->where('id', '[0-9]+');
     Route::get('getPoster/{filePoster}','ApiController@getPoster');
-
+    Route::post('getMessage','ApiController@getMessage');
 
 });
 
@@ -73,10 +73,11 @@ Route::group(['prefix' => 'search'], function () {
 
     Route::get('users', 'Search\SearchController@getList');
     Route::get('movies','Search\SearchController@getMovies');
-    Route::get('movie/{id}/cinemas','Search\SearchController@getCinemas')->where('id', '[0-9]+');
+    Route::get('movie/{id}/cinemas/{city}','Search\SearchController@getCinemas')->where('id', '[0-9]+')->where('city', '[0-9]+');
     Route::get('movie/{id}','Search\SearchController@getMovieInfo')->where('id', '[0-9]+');
     Route::get('cinema/{id}','Search\SearchController@getCinemaInfo')->where('id', '[0-9]+');
     Route::get('users/seances/{id}','Search\SearchController@getList');
+    Route::post('users/seances/{id}', 'Search\SearchController@saveMessage');
 
 });
 

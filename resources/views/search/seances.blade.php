@@ -9,8 +9,6 @@
                     <div class="panel-heading">Сеансы в Вашем городе</div>
                     <div class="panel-body" style="padding:10px 40px;">
 
-                        {{--TODO-SweetJuli: Менять город--}}
-
                         {!! Form::open(array('class' => 'form-horizontal')) !!}
 
                         @include('errors.error')
@@ -19,7 +17,7 @@
 
 
                             @foreach($cinemas as $key => $value)
-                                <h3><a href ="/search/cinema/{{$key}}">{{ $names[$key] }}</a></h3>
+                                <h3><a href="/search/cinema/{{$key}}">{{ $names[$key] }}</a></h3>
 
                                 <div>
                                     <ul class="nav nav-tabs" role="tablist">
@@ -48,13 +46,15 @@
                                                              class="tab-pane">
                                                             @endif
                                                             @foreach($value2 as $item)
-                                                                <a href="/users/seances/{{ $item->id }}">{{$item->time}}</a>
+                                                                <a href="/search/users/seances/{{ $item->id }}">{{$item->time}}</a>
                                                             @endforeach
                                                         </div>
                                                         @endforeach
                                                 </div>
 
                                     </div>
+
+                                    <hr>
                                     @endforeach
 
                                     @else

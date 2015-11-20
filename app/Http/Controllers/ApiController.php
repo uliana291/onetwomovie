@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\User;
+use Illuminate\Http\Request;
 use Image;
 use App\Cities;
 use App\Genres;
@@ -36,9 +37,9 @@ class ApiController extends Controller
     public static function getPoster($link, $width = 200, $height = 0)
     {
 
-        if (file_exists(base_path() . '/public/upload/'. $link)) {
+        if (file_exists(base_path() . '/public/upload/' . $link)) {
 
-            $img = Image::make(base_path() . '/public/upload/'. $link);
+            $img = Image::make(base_path() . '/public/upload/' . $link);
 
         } else {
             $original_name = $link;
@@ -49,13 +50,41 @@ class ApiController extends Controller
                 $constraint->aspectRatio();
             });
 
-            $img->save(base_path() . '/public/upload/'. $original_name);
+            $img->save(base_path() . '/public/upload/' . $original_name);
         }
 
         $response = response()->make($img->encode('jpg'));
         $response->header('Content-Type', 'image/jpg');
 
         return $response;
+    }
+
+
+    public static function getMessage(Request $request)
+    {
+        $name = User::find($request->input('user_id'))->name;
+        $my_name = $request->user()->name;
+        $seance = Seances::find($request->input('seance'));
+        $movie = Movies::find($seance->movie_id)->title;
+        $cinema = Cinemas::find($seance->cinema_id)->title;
+        $date = $seance->date;
+        $time = $seance->time;
+        $msg = [];
+        $msg[0] = "Привет, " . $name . "! \n\r" .
+            "Приглашаю тебя пойти со мной в кино на фильм \"" . $movie .
+            "\" в кинотеатр " . $cinema . ". \n\r" .
+            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . " \n\r" .
+            "Очень надеюсь на твой ответ, \n\r" .
+            $name . ".";
+        $msg[1] = "Доброго времени суток, " . $name . "! \n\r" .
+            "Приглашаю Вас посетить кинотеатр " . $cinema . " и посмотреть фильм \"" . $movie . "\".\n\r" .
+            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . " \n\r" .
+            "С нетерпением жду Вашего ответа, \n\r" .
+            $my_name . ".";
+        $fixnum = rand(0,1);
+        $array = array('message' => $msg[$fixnum], 'seance_id' => $request->input('seance'));
+        return response()->json($array);
+
     }
 
 

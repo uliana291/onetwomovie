@@ -13,7 +13,7 @@ class AddImageToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('ava');
+            $table->string('ava')->default("noava.jpeg");
         });
     }
 

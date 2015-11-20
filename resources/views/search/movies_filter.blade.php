@@ -7,6 +7,19 @@
 
     @include('errors.error')
 
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3" style="text-align: right; ">
+                {!!  Form::label('city_id', 'Город', array('class' => 'control-label')) !!}
+            </div>
+            <div class="col-md-9">
+                {!!  Form::select('city_id', $cityList , $city, array('class' => 'form-control')) !!}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
     @foreach($movies as $key => $value)
 
         <div class="form-group">
@@ -24,7 +37,7 @@
                     {!! Form::label('age_restriction', $value['age_restriction'], array('class' => 'control-label'))  !!}
                 </div>
                 <div class="col-md-3">
-                    {!! link_to("/search/movie/".$value['id']."/cinemas", "Хочу пойти..", array('class' => 'control-label'))  !!}
+                    {!! link_to("/search/movie/".$value['id']."/cinemas/".$city, "Хочу пойти..", array('class' => 'control-label'))  !!}
                 </div>
             </div>
         </div>

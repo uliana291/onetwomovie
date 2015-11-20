@@ -11,7 +11,7 @@
     <!— Optional theme —>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
           integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}"/>
 </head>
 
 <body>
@@ -62,5 +62,14 @@
         integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
         crossorigin="anonymous"></script>
 
+<script>
+    $(function() {
+        $('#city_id').change(function() {
+            this.form.submit();
+        });
+    });
+</script>
+
+@yield('modal')
 </body>
 </html>
