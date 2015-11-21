@@ -171,13 +171,14 @@
                     success: function (data) {
                         $('.textAreaModal').val(data.message);
                         $('.userHidden').val(dataId);
+                        $('#myModal').modal('show');
                     },
                     error: function (data) {
 
                     }
                 });
                 //alert(dataId);
-                $('#myModal').modal('show');
+
             })
         });
     </script>

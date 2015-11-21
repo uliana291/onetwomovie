@@ -148,8 +148,30 @@ class SearchController extends Controller
     public
     function getMovieInfo($id)
     {
-        $movie = Movies::find($id);
-        dd($movie);
+        $movie = Movies::where('id', $id)->with('getGenres')->first();
+        $genres = $movie->getGenres;
+
+        $movie_genres = [];
+        foreach ($genres as $genre) {
+            $movie_genres[] = $genre->getGenre->name;
+        }
+
+        $poster = json_decode($movie->poster)->name;
+        $movie->poster = $poster;
+
+
+        $images = json_decode($movie->images);
+
+        $movie_images = [];
+
+        foreach ($images as $image) {
+            if ($image->name <> null) {
+                $movie_images[] = $image->name;
+            }
+        }
+
+        return view()->make('search.movie', ['movie' => $movie, 'genres' => $movie_genres, 'images' => $movie_images]);
+
     }
 
     public
