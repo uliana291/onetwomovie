@@ -37,6 +37,14 @@
         @if ( Auth::check())
             <ul class="nav navbar-nav">
                 <li class="nav-item">
+                    <a class="nav-link" href="/user/messages">Сообщения @if ($unread <> 0) <div class="badge badge-warning">{{ $unread }}</div> @endif</a>
+                </li>
+            </ul>
+        @endif
+
+        @if ( Auth::check())
+            <ul class="nav navbar-nav">
+                <li class="nav-item">
                     <a class="nav-link" href="/search/users">Поиск</a>
                 </li>
             </ul>
@@ -69,7 +77,6 @@
         });
     });
 </script>
-
 @yield('modal')
 </body>
 </html>

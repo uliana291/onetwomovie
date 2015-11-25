@@ -113,6 +113,8 @@ class ApiController extends Controller
 
     public static function getDynamicValues($type)
     {
+        ini_set('memory_limit', '512M');
+        ini_set("max_execution_time", "600");
         $file = public_path("upload/Tmp" . $type . ".json.gz");
         if ($type == "Cinemas") {
             $link = "https://api.kinohod.ru/api/data/1/eed7c723-0b90-3fc9-a3bc-bf235e907b35/cinemas.json.gz";
@@ -120,10 +122,11 @@ class ApiController extends Controller
             $link = "https://api.kinohod.ru/api/data/1/eed7c723-0b90-3fc9-a3bc-bf235e907b35/seances/week.json.gz";
         } else
             $link = "https://api.kinohod.ru/api/data/1/eed7c723-0b90-3fc9-a3bc-bf235e907b35/running/week.json.gz";
+        //dd($link);
         file_put_contents($file, fopen($link, 'r'));
         $fp = gzopen($file, "r");
         if ($fp != false) {
-            $contents = gzread($fp, 50000000);
+            $contents = gzread($fp, 134217720);
             $jsonArray = json_decode($contents, true);
             foreach ($jsonArray as $key => $value) {
                 if ($type == "Cinemas")

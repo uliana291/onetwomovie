@@ -12,24 +12,28 @@ class Seances extends Model
 
     public static function store(Array $seance)
     {
-        $seance = array_only($seance,array('id', 'movieId', 'cinemaId', 'date', 'time', 'startTime'));
+        $seance = array_only($seance, array('id', 'movieId', 'cinemaId', 'date', 'time', 'startTime'));
         $seance['movie_id'] = $seance['movieId'];
         unset($seance['movieId']);
         $seance['cinema_id'] = $seance['cinemaId'];
         unset($seance['cinemaId']);
         $seance['start_time'] = $seance['startTime'];
         unset($seance['startTime']);
-        $seances = Seances::firstOrNew($seance);
 
-        $seances->save();
+        if (Seances::find($seance['id']) == null)
+            $seances = Seances::updateOrCreate($seance);
+
+        // $seances->save();
     }
 
-    public function getMovie() {
-        return $this->hasOne("\App\Movies","id","movie_id");
+    public function getMovie()
+    {
+        return $this->hasOne("\App\Movies", "id", "movie_id");
     }
 
-    public function getCinema() {
-        return $this->hasOne("\App\Cinemas","id","cinema_id");
+    public function getCinema()
+    {
+        return $this->hasOne("\App\Cinemas", "id", "cinema_id");
     }
 
 }

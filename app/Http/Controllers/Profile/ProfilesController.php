@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Messages;
+use App\Seances;
 use App\User;
 use App\Cities;
 use App\Helper;
@@ -10,6 +12,7 @@ use Validator;
 use Illuminate\Http\Request;
 use DataTime;
 use Image;
+use Illuminate\Support\Facades\DB;
 
 class ProfilesController extends Controller
 {
@@ -77,7 +80,7 @@ class ProfilesController extends Controller
             'ava' => 'mimes:png,jpeg'
         ]);
 
-        $arrayData = array_only($request->all(),['name','last_name','gender','city_id','status','birth_date','about','skype','vk','mobile_number']);
+        $arrayData = array_only($request->all(), ['name', 'last_name', 'gender', 'city_id', 'status', 'birth_date', 'about', 'skype', 'vk', 'mobile_number']);
 
         $arrayData['status'] = ($request->input('status') == null ? "disable" : "enable");
 
@@ -100,10 +103,64 @@ class ProfilesController extends Controller
             $img->crop(200, 200, 0, 0)->save();
         }
 
-        User::where("id",$request->user()->id)->update($arrayData);
+        User::where("id", $request->user()->id)->update($arrayData);
 
         return redirect()->back()->with('error', 0)->with('message', 'Профиль успешно обновлен.');
 
+    }
+
+    public function showMessages(Request $request)
+    {
+        $id = $request->user()->id;
+        $sql = DB::select(DB::raw("select * from (select * from `messages` where `user_id_received` = " . $id . " or `user_id_sent` = " . $id . " order by `created_at` desc) as `messages` group by `dialog_num`"));
+
+        $ids = [];
+        foreach ($sql as $item) {
+            $ids[] = $item->id;
+        }
+        $msgs = Messages::whereIn("id", $ids)
+            ->with('getSender')
+            ->with('getReceiver')
+            ->orderBy("created_at", "DESC")
+            ->get();
+
+        return view()->make('user.messages', array('messages' => $msgs, 'id' => $id));
+    }
+
+    public function showDialog(Request $request, $dialog)
+    {
+        $id = $request->user()->id;
+        $msgs = Messages::where("dialog_num", $dialog)->orderBy("created_at",
+            "ASC")->with('getSender')->with('getReceiver')->with('getSeance')->get();
+        $any_msg = $msgs->first();
+        $dialog_with = ($any_msg->getReceiver->id == $id ? $any_msg->getSender : $any_msg->getReceiver);
+        foreach ($msgs as $msg) {
+            if ($msg->getReceiver->id == $id) {
+                $msg->read = 1;
+                $msg->update();
+            }
+        }
+
+
+        return view()->make('user.dialog', array('messages' => $msgs, 'id' => $id, 'dialog_with' => $dialog_with));
+    }
+
+    public function sendMessage(Request $request, $dialog)
+    {
+        $msg = [];
+        $msg ['message'] = $request->input('messageArea');
+        $msg ['user_id_sent'] = $request->user()->id;
+        $msg ['user_id_received'] = $request->input('userHidden');
+        $msg ['dialog_num'] = $dialog;
+        Messages::create($msg);
+        return redirect()->back();
+    }
+
+    public function showSeanceInfo(Request $request, $dialog, $id)
+    {
+        $seance = Seances::where('id',$id)->with('getCinema')->with('getMovie')->get();
+
+        return view()->make('user.seance_info', ['seance' => $seance]);
     }
 
 }

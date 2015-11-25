@@ -189,6 +189,18 @@ class SearchController extends Controller
         $message['user_id_received'] = $request->input('userHidden');
         $message['user_id_sent'] = $request->user()->id;
         $message['message'] = $request->input('textArea');
+        $ids = [$message['user_id_sent'], $message['user_id_received']];
+        $b = $message['user_id_sent'] == $message['user_id_received'];
+        if ($b)
+            $res = Messages::whereIn('user_id_sent', $ids)->whereIn('user_id_received', $ids)->first();
+        else
+            $res = Messages::whereIn('user_id_sent', $ids)->whereIn('user_id_received', $ids)->whereRaw('user_id_received <> user_id_sent')->first();
+
+        if (count($res) == 0)
+            $message['dialog_num'] = Messages::orderBy('dialog_num', 'DESC')->first()->dialog_num + 1;
+        else
+            $message['dialog_num'] = $res->dialog_num;
+
         Messages::create($message);
         return redirect()->back()->with('error', 0)->with('message', 'Сообщение отправлено.');
     }

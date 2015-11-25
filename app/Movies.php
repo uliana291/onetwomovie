@@ -48,9 +48,10 @@ class Movies extends Model
                 unset($movie[$key]);
         }
 
-        $movies = Movies::firstOrNew($movie);
+        if (Movies::find($movie['id']) == null)
+        $movies = Movies::updateOrCreate($movie);
 
-        $movies->save();
+        //$movies->save();
     }
 
     public function getGenres() {
