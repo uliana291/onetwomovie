@@ -12,8 +12,11 @@ use App\Cinemas;
 use App\Seances;
 use App\Movies;
 
+define('CREDENTIALS_PATH', '~/.credentials/calendar-php-credentials.json');
+
 class ApiController extends Controller
 {
+
     public static function getImage($id, $width, $height)
     {
         // TODO: if file not exist make no avatar image
@@ -81,7 +84,7 @@ class ApiController extends Controller
             "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . " \n\r" .
             "С нетерпением жду Вашего ответа, \n\r" .
             $my_name . ".";
-        $fixnum = rand(0,1);
+        $fixnum = rand(0, 1);
         $array = array('message' => $msg[$fixnum], 'seance_id' => $request->input('seance'));
         return response()->json($array);
 

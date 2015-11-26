@@ -42,7 +42,7 @@
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <div class="col-md-8" style="text-align: right">
-                                                <a href="messages/{{$message->dialog_num}}/seance/{{$message->seance_id}}">Подробнее
+                                                <a href="/user/messages/{{$message->dialog_num}}/seance/{{$message->seance_id}}">Подробнее
                                                     о сеансе..</a>
                                             </div>
                                             <div class="col-md-2"></div>

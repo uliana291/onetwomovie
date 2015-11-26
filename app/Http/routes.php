@@ -50,6 +50,10 @@ Route::group(['middleware' => 'before'], function () {
         Route::post('messages/{dialog}', 'Profile\ProfilesController@sendMessage')->where('dialog', '[0-9]+');
         Route::get('messages/{dialog}/seance/{id}', 'Profile\ProfilesController@showSeanceInfo')->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
+        Route::post('messages/{dialog}/seance/{id}', 'Profile\ProfilesController@addToCalendar')->where('dialog',
+            '[0-9]+')->where('id', '[0-9]+');
+        Route::get('calendar/{dialog}/{id}', ['as' => 'calendar_back', 'uses' => 'Profile\ProfilesController@addToCalendar'])->where('dialog',
+            '[0-9]+')->where('id', '[0-9]+');
     });
 
     Route::group(['prefix' => '/api'], function () {
@@ -78,5 +82,6 @@ Route::group(['middleware' => 'before'], function () {
 
     });
 
-
+    Route::get('google_calendar_callback', 'Profile\ProfilesController@getGoogleAuth');
 });
+
