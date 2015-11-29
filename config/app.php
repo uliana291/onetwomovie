@@ -149,7 +149,9 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
-        Barryvdh\Debugbar\ServiceProvider::class
+        Barryvdh\Debugbar\ServiceProvider::class,
+
+        DaveJamesMiller\Breadcrumbs\ServiceProvider::class
     ],
 
     /*
@@ -169,6 +171,7 @@ return [
         'Artisan'   => Illuminate\Support\Facades\Artisan::class,
         'Auth'      => Illuminate\Support\Facades\Auth::class,
         'Blade'     => Illuminate\Support\Facades\Blade::class,
+        'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Bus'       => Illuminate\Support\Facades\Bus::class,
         'Cache'     => Illuminate\Support\Facades\Cache::class,
         'Config'    => Illuminate\Support\Facades\Config::class,

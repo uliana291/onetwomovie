@@ -52,7 +52,7 @@ Route::group(['middleware' => 'before'], function () {
             '[0-9]+')->where('id', '[0-9]+');
         Route::post('messages/{dialog}/seance/{id}', 'Profile\ProfilesController@addToCalendar')->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
-        Route::get('calendar/{dialog}/{id}', ['as' => 'calendar_back', 'uses' => 'Profile\ProfilesController@addToCalendar'])->where('dialog',
+            Route::get('calendar/{dialog}/{id}', ['as' => 'calendar_back', 'uses' => 'Profile\ProfilesController@addToCalendar'])->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
     });
 

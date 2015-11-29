@@ -60,7 +60,7 @@
 
     </nav>
 </div>
-
+{{--{!! Breadcrumbs::render($breadcrumb) !!}--}}
 @yield('content')
 
 <script src="/assets/jquery.min.js"></script>
