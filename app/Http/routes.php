@@ -18,7 +18,7 @@ Route::group(['middleware' => 'before'], function () {
     Route::get('/', function () {
 
         if (Auth::check())
-            return view('welcome');
+            redirect()->route('search_user');
         else
             return view('auth.login');
     });
@@ -45,6 +45,8 @@ Route::group(['middleware' => 'before'], function () {
         Route::post('edit', 'Profile\ProfilesController@saveProfile');
 
         Route::get('{id?}', 'Profile\ProfilesController@showProfile')->where('id', '[0-9]+');
+
+        Route::post('{id}', 'Profile\ProfilesController@sendMessage')->where('id', '[0-9]+');
         Route::get('messages', 'Profile\ProfilesController@showMessages');
         Route::get('messages/{dialog}', 'Profile\ProfilesController@showDialog')->where('dialog', '[0-9]+');
         Route::post('messages/{dialog}', 'Profile\ProfilesController@sendMessage')->where('dialog', '[0-9]+');
@@ -72,7 +74,7 @@ Route::group(['middleware' => 'before'], function () {
 
     Route::group(['prefix' => 'search'], function () {
 
-        Route::get('users', 'Search\SearchController@getList');
+        Route::get('users', ['as' => 'search_user', 'uses' => 'Search\SearchController@getList']);
         Route::get('movies', 'Search\SearchController@getMovies');
         Route::get('movie/{id}/cinemas/{city}', 'Search\SearchController@getCinemas')->where('id', '[0-9]+')->where('city', '[0-9]+');
         Route::get('movie/{id}', 'Search\SearchController@getMovieInfo')->where('id', '[0-9]+');

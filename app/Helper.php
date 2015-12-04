@@ -117,4 +117,16 @@ class Helper
         }
         return $date[2] . '&nbsp;' . $m . '&nbsp;' . $date[0];
     }
+
+
+    public static function age_range()
+    {
+        $arr = [];
+        foreach(range(16,95) as $value)
+            $arr[$value] = $value;
+        $arr[0] = '-';
+        ksort($arr);
+        return $arr;
+
+    }
 }

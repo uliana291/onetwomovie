@@ -1,15 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Информация о фильме</div>
-                    <div class="panel-body" style="padding:10px 40px;">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
+                    <!-- Content -->
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Информация о фильме</h2>
+                        </header>
+
+                        {!! Form::open() !!}
 
                         @include('errors.error')
                         <div>
@@ -54,6 +60,7 @@
 
 
                         {!! Form::close() !!}
+                    </article>
 
                     </div>
                 </div>

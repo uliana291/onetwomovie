@@ -36,15 +36,15 @@ class SearchController extends Controller
         if ($request->input('gender')) {
             $users = $users->where("gender", '=', $request->input('gender'));
         }
-        if ($request->input('city_id')) {
+        if ($request->input('city_id') <> 0) {
             $users = $users->where("city_id", '=', $city_id);
         }
 
-        if ($request->input('age_from')) {
+        if ($request->input('age_from') <> 0) {
             $users = $users->where(DB::raw("TIMESTAMPDIFF(YEAR,birth_date,CURDATE())"), '>=', $request->input('age_from'));
         }
 
-        if ($request->input('age_to')) {
+        if ($request->input('age_to') <> 0) {
             $users = $users->where(DB::raw("TIMESTAMPDIFF(YEAR,birth_date,CURDATE())"), '<=', $request->input('age_to'));
         }
 
@@ -78,8 +78,8 @@ class SearchController extends Controller
 
 
         return view()->make('search.user_filter', array('users' => $users, 'cityList' => $cityList, 'city_id' => $city_id,
-            'age_from' => $request->input('age_from'),
-            'age_to' => $request->input('age_to'),
+            'age_from' => ($request->input('age_from')? $request->input('age_from') : 0),
+            'age_to' => ($request->input('age_to')? $request->input('age_to') : 0),
             'gender' => $request->input('gender'),
             'id' => $id));
 
@@ -88,6 +88,8 @@ class SearchController extends Controller
     public
     function getMovies(Request $request)
     {
+
+        date_default_timezone_set('Europe/Moscow');
 
         if ($request->input('city_id') == null)
             $city = $request->user()->city_id;

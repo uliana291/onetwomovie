@@ -1,15 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Сеансы в Вашем городе</div>
-                    <div class="panel-body" style="padding:10px 40px;">
+                    <!-- Content -->
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Сеансы в вашем городе</h2>
+                        </header>
+
+                        {!! Form::open(array()) !!}
 
                         @include('errors.error')
 
@@ -58,24 +64,25 @@
                                     @endforeach
 
                                     @else
-                                        <div class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12" style="text-align: center; ">
-                                                    Сеансов не найдено :(
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-12" style="text-align: center; ">
+                                                Сеансов не найдено :(
                                             </div>
                                         </div>
 
-                                    @endif
-
-
-
-                                    {!! Form::close() !!}
-
                                 </div>
-                    </div>
+
+                                @endif
+
+
+
+                                {!! Form::close() !!}
+
+                    </article>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
 @endsection

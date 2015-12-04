@@ -1,17 +1,22 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Поиск пользователей |
-                        <a style="text-align: right" href="/search/movies">Поиск фильмов</a>
-                    </div>
-                    <div class="panel-body" style="padding:10px 40px;">
+    <div id="main-wrapper">
+        <div class="wrapper style1">
+            <div class="inner">
+                <div class="container">
+                    <div id="content">
+                        <article class="box excerpt">
+                            <header class="major">
+                                <h2>Поиск пользователей |
+                                    <a style="text-align: right" href="/search/movies">Поиск фильмов</a></h2>
+                            </header>
 
-                        @yield('filter')
+
+                            @yield('filter')
+                        </article>
+
 
                     </div>
                 </div>

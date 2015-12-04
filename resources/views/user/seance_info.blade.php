@@ -2,30 +2,37 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Информация о сеансе</div>
-                    <div class="panel-body" style="padding:10px 40px;">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
+                    <!-- Content -->
+
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Информация о сеансе</h2>
+                        </header>
+
+                        {!! Form::open() !!}
 
 
                         @include('errors.error')
 
 
-                        <div class="form-group">
-                            <div class="row">
+                        <div>
+                            <label style="font-size: medium">
                                 Вы приглашены на фильм
                                 <a href="/search/movie/{{ $seance->movie_id }}">{{ $seance->getMovie->title }}</a>
                                 в кинотеатр
                                 <a href="/search/cinema/{{ $seance->cinema_id }}">{{ $seance->getCinema->title }}</a>.
                                 <div>Дата: {{ \App\Helper::russian_date($seance->date) }}, {{ $seance->time }}</div>
-                            </div>
-                            <div class="row">
-                                <button name="calendar" class="btn bg-primary">Добавить в календарь</button>
+                            </label>
+                            <div>
+                                <button name="calendar" class="button">Добавить в календарь</button>
                                 <input name="seanceHidden" type="hidden" value="{{ $seance->id }}"/>
                             </div>
                         </div>
@@ -33,11 +40,13 @@
 
                         {!! Form::close() !!}
 
-                    </div>
+                    </article>
+
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
 
 @endsection

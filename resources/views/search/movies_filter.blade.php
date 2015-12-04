@@ -3,47 +3,47 @@
 @section('filter')
 
 
-    {!! Form::open(array('class' => 'form-horizontal', 'method'=>'GET')) !!}
+    {!! Form::open(array('method'=>'GET')) !!}
 
     @include('errors.error')
 
-    <div class="form-group">
-        <div class="row">
-            <div class="col-md-3" style="text-align: right; ">
-                {!!  Form::label('city_id', 'Город', array('class' => 'control-label')) !!}
-            </div>
-            <div class="col-md-9">
-                {!!  Form::select('city_id', $cityList , $city, array('class' => 'form-control')) !!}
-            </div>
+    <div class="row">
+        <div class="1u 12u(mobile)" style="text-align: right; ">
+            {!!  Form::label('city_id', 'Город') !!}
+        </div>
+        <div class="3u 12u(mobile)">
+            {!!  Form::select('city_id', $cityList , $city) !!}
+        </div>
+        <div class="8u 12u(mobile)">
         </div>
     </div>
 
-    <hr>
+    @if(count($movies) == 0)
+        <hr>
+        <label>В Вашем городе, к сожалению, фильмов не найдено :(</label>
 
-    @foreach($movies as $key => $value)
+    @else
+        @foreach($movies as $key => $value)
 
-        <div class="form-group">
+            <hr>
+
             <div class="row">
-                <div class="col-md-3" style="text-align: right; ">
-                    {!! link_to("/search/movie/".$value['id'], $value['title'], array('class' => 'control-label'))  !!}
+                <div class="4u 12u(mobile)" style="text-align: left; ">
+                    <label>{!! link_to("/search/movie/".$value['id'], $value['title'])  !!}</label>
+                    <div>
+                        <img src="/api/getPoster/{{$value['poster']}}" alt="Постер">
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <img src="/api/getPoster/{{$value['poster']}}" alt="Постер">
+                <div class="1u 12u(mobile)" style="text-align: center">
+                    {!! Form::label('age_restriction', $value['age_restriction'])  !!}
                 </div>
-                <div class="col-md-1">
-                    {!! Form::label('rating', ($value['rating'] == null? "-" : $value['rating'] ), array('class' => 'control-label'))  !!}
-                </div>
-                <div class="col-md-1" style="text-align: center">
-                    {!! Form::label('age_restriction', $value['age_restriction'], array('class' => 'control-label'))  !!}
-                </div>
-                <div class="col-md-3">
-                    {!! link_to("/search/movie/".$value['id']."/cinemas/".$city, "Хочу пойти..", array('class' => 'control-label'))  !!}
+                <div class="7u 12u(mobile)">
+                    <label>{!! link_to("/search/movie/".$value['id']."/cinemas/".$city, "Хочу пойти..")  !!}</label>
                 </div>
             </div>
-        </div>
 
-
-    @endforeach
+        @endforeach
+    @endif
 
 
     {!! Form::close() !!}

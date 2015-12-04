@@ -2,7 +2,6 @@
 
 use App\Helper;
 use Closure;
-use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Support\Facades\Auth;
 
 class BeforeMiddleware
@@ -15,6 +14,8 @@ class BeforeMiddleware
             view()->share('unread', Helper::checkUnreadMessages($request));
         }
         view()->share('breadcrumb', 'home');
+        $url = $request->path();
+        view()->share('url', $url);
         return $next($request);
 
     }

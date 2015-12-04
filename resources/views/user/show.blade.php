@@ -2,126 +2,180 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Профиль {{$user->name ." " . $user->last_name}}
-                        @if ($user->self == true)
-                            <a style="text-align: right" href="user/edit">Редактировать</a>
-                        @endif
-                    </div>
-                    <div class="panel-body" style="padding:10px 40px;">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
+                    <!-- Content -->
 
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Профиль {{$user->name ." " . $user->last_name}}</h2>
+
+                            <h4>     @if ($user->self == true)
+                                    <a style="text-color: blue;" href="user/edit">Нажмите, чтобы отредактировать</a>
+                                @endif
+                            </h4>
+
+                        </header>
 
                         @include('errors.error')
 
+                        {!! Form::open(array('method'=>'GET')) !!}
+
+
+
                         @if ($user->ava <> null)
-                        <div class="form-group">
-                            <div class="row">
-                                <img src="{{ $user->ava }}" alt="Фото профиля">
+                            <div>
+                                <img class="image left" src="{{ $user->ava }}"
+                                     alt="Фото профиля">
+                                <span class="date">
+                                    {{($user->status == "enable"? "Хочу в кино" : "Пока не хочу в кино")}}
+                                </span>
                             </div>
-                        </div>
                         @endif
 
 
-                        <div class="form-group">
-                            <div class="row">
-                                {{($user->status == "enable"? "Хочу в кино" : "Пока не хочу в кино")}}
-                            </div>
-                        </div>
 
                         @if ($city <> null )
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    Город
-                                </div>
-                                <div class="col-md-9">
-                                    {{ $city->city }}
-                                </div>
+
+                            <div>
+                                <strong>Город</strong>
+                                <span style="margin-left: 50px;">{{ $city->city }}</span>
+
                             </div>
-                        </div>
+
                         @endif
 
                         @if ($user->age != 0)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: right; ">
-                                        Возраст
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{$user->age}}
-                                    </div>
-                                </div>
+                            <div>
+                                <strong>
+                                    Возраст
+                                </strong>
+                                <span style="margin-left: 35px;">
+                                    {{$user->age}}
+                                </span>
                             </div>
+
                         @endif
 
                         @if ($user->mobile_number <> null)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: right; ">
-                                        Телефон
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ $user->mobile_number }}
-                                    </div>
-                                </div>
+                            <div>
+                                <strong>
+                                    Телефон
+                                </strong>
+                                <span style="margin-left: 30px;">
+                                    {{ $user->mobile_number }}
+                                </span>
                             </div>
                         @endif
 
                         @if ($user->skype <> null)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: right; ">
-                                        Skype
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ $user->skype }}
-                                    </div>
-                                </div>
+
+                            <div>
+                                <strong>
+                                    Skype
+                                </strong>
+                                <span style="margin-left: 52px;">
+                                    {{ $user->skype }}
+                                </span>
                             </div>
+
                         @endif
 
                         @if ($user->vk <> null)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: right; ">
-
-                                    </div>
-                                    <div class="col-md-9">
-                                        <a href="http://vk.com/{{$user->vk}}">Вконтакте</a>
-                                    </div>
-                                </div>
+                            <div>
+                                <a href="http://vk.com/{{$user->vk}}">Вконтакте</a>
                             </div>
                         @endif
 
                         @if ($user->about <> null)
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-3" style="text-align: right; ">
-                                        Обо мне
-                                    </div>
-                                    <div class="col-md-9">
-                                        {{ $user->about }}
-                                    </div>
-                                </div>
+                            <div>
+                                <strong>
+                                    Обо мне
+                                </strong>
+                                <span style="margin-left: 30px;">
+                                    {{ $user->about }}
+                                </span>
+                            </div>
+                        @endif
+                        <hr>
+                        @if($user->id <> request()->user()->id)
+
+                            <div>
+                                <input type="button" class="button"
+                                       value="Написать сообщение" data-id="{{$user->id}}"/>
                             </div>
                         @endif
 
 
-
-
                         {!! Form::close() !!}
-                    </div>
+                    </article>
+
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
+
+@endsection
+
+
+@section('modal2')
+
+    @parent
+
+    {!! Form::open()!!}
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Отправить</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea name="textArea" class="form-control textAreaModal" style="height: 250px"></textarea>
+                    <input name="userHidden" class="userHidden" type="hidden">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="button alt" data-dismiss="modal">Отмена</button>
+                    <input value="Отправить" type="submit" class="button"/>
+                </div>
+            </div>
         </div>
     </div>
 
+    {!! Form::close()!!}
+    <script>
+        $(document).ready(function () {
+            $('.openModal').click(function () {
+                var dataId = $(this).attr('data-id');
+
+                $.ajax({
+                    type: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "/api/getMessage",
+                    async: true,
+                    cache: false,
+                    dataType: "json",
+                    data: {user_id: dataId},
+                    success: function (data) {
+                        $('.textAreaModal').val(data.message);
+                        $('.userHidden').val(dataId);
+                        $('#myModal').modal('show');
+                    },
+                    error: function (data) {
+
+                    }
+                });
+            })
+        });
+    </script>
 @endsection

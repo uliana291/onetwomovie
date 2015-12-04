@@ -2,173 +2,168 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Ваш Профиль</div>
-                    <div class="panel-body" style="padding:10px 40px;">
+                    <!-- Content -->
 
-                        {!! Form::open(array('class' => 'form-horizontal', 'files' => true)) !!}
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Ваш профиль</h2>
+                        </header>
+
+                        {!! Form::open(array('files' => true)) !!}
 
                         {!! Form::token() !!}
 
 
                         @include('errors.error')
+                        <div class="wrapper style2">
+                            <div class="inner">
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('name', 'Имя', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('name', $user->name, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                <section class="container box feature2" style="text-align: left">
+                                    <div class="row">
+                                        <div class="6u 12u(mobile)">
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('name', 'Имя') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('name', $user->name) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('last_name', 'Фамилия', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('last_name', $user->last_name, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('gender', 'Пол', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::select('gender',array('male' => 'М', 'female' => 'Ж'), $user->gender, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('last_name', 'Фамилия') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('last_name', $user->last_name) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('city_id', 'Город', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::select('city_id', $cityList ,$user->city_id, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('gender', 'Пол') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::select('gender',array('male' => 'М', 'female' => 'Ж'), $user->gender) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!! Form::label('ava','Загрузка аватара', array('class' => 'control-label') ) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!! Form::file('ava', null, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('city_id', 'Город') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::select('city_id', $cityList, $user->city_id) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('status', 'Хочу сходить', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::checkbox('status', $user->status, ($user->status == 'enable'? true : false)) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
+                                                <div>
+                                                    {!! Form::label('ava','Загрузка аватара') !!}
+                                                </div>
+                                                <div>
+                                                    {!! Form::file('ava', null) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('birth_date', 'Дата рождения', array('class' => 'control-label')) !!}
-                                </div>
 
-                                <div class="col-md-9">
-                                    {!!  Form::date('birth_date', $user->birth_date, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('about', 'Обо мне', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::textarea('about', $user->about, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                                {!!  Form::label('status', 'Хочу сходить', array('style'=>'display: inline-block; padding-top: 15px')) !!}
+                                                {!!  Form::checkbox('status', $user->status, ($user->status == 'enable'? true : false)) !!}
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('email', 'Email', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('email', $user->email, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('mobile_number', 'Телефон', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('mobile_number', $user->mobile_number, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('birth_date', 'Дата рождения') !!}
+                                                </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('skype', 'Skype', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('skype', $user->skype, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                                <div>
+                                                    {!!  Form::date('birth_date', $user->birth_date) !!}
+                                                </div>
+                                            </div>
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-3" style="text-align: right; ">
-                                    {!!  Form::label('vk', 'Vk.com/', array('class' => 'control-label')) !!}
-                                </div>
-                                <div class="col-md-9">
-                                    {!!  Form::text('vk', $user->vk, array('class' => 'form-control')) !!}
-                                </div>
-                            </div>
-                        </div>
+                                        </div>
+                                        <div class="6u 12u(mobile)">
 
-                        <div class="form-group">
-                            <div class="row">
-                                <div style="text-align: right; ">
-                                    <button type="submit" class="btn btn-primary"
-                                            style="margin-right: 15px; width: 150px;">
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('about', 'Обо мне') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::textarea('about', $user->about, array('style'=>'height: 170px')) !!}
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('email', 'Email') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('email', $user->email) !!}
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('mobile_number', 'Телефон') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('mobile_number', $user->mobile_number) !!}
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('skype', 'Skype') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('skype', $user->skype) !!}
+                                                </div>
+                                            </div>
+
+
+                                            <div>
+                                                <div>
+                                                    {!!  Form::label('vk', 'Vk.com/') !!}
+                                                </div>
+                                                <div>
+                                                    {!!  Form::text('vk', $user->vk) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <div style="text-align: right">
+                                    <button type="submit" class="button">
                                         Сохранить
                                     </button>
                                 </div>
+
+                                {!! Form::close() !!}
+
+
                             </div>
                         </div>
+                    </article>
 
-
-                        {!! Form::close() !!}
-
-                    </div>
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
 
 @endsection

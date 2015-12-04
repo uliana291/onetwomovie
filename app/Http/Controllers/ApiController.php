@@ -19,11 +19,8 @@ class ApiController extends Controller
 
     public static function getImage($id, $width, $height)
     {
-        // TODO: if file not exist make no avatar image
         $user = User::find($id);
-        // if(is_null($user)) {
 
-        //}
 
         $img = Image::make(public_path("upload/" . $user->ava));
 
@@ -76,12 +73,12 @@ class ApiController extends Controller
         $msg[0] = "Привет, " . $name . "! \n\r" .
             "Приглашаю тебя пойти со мной в кино на фильм \"" . $movie .
             "\" в кинотеатр " . $cinema . ". \n\r" .
-            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . " \n\r" .
+            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . ". \n\r" .
             "Очень надеюсь на твой ответ, \n\r" .
-            $name . ".";
+            $my_name . ".";
         $msg[1] = "Доброго времени суток, " . $name . "! \n\r" .
             "Приглашаю Вас посетить кинотеатр " . $cinema . " и посмотреть фильм \"" . $movie . "\".\n\r" .
-            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . " \n\r" .
+            "Сеанс, на который предлагаю пойти: " . $date . " в " . $time . ". \n\r" .
             "С нетерпением жду Вашего ответа, \n\r" .
             $my_name . ".";
         $fixnum = rand(0, 1);

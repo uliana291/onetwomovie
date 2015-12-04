@@ -2,12 +2,19 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Reset Password</div>
-                    <div class="panel-body">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
+
+                    <!-- Content -->
+
+                    <article class="box excerpt">
+                        <header class="major">
+                            <h2>Сброс пароля</h2>
+                        </header>
 
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -24,43 +31,45 @@
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <input type="hidden" name="token" value="{{ $token }}">
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">E-Mail</label>
+                            <div>
+                                <label>E-Mail</label>
 
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                                <div>
+                                    <input type="email" name="email" value="{{ old('email') }}">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Пароль</label>
+                            <div>
+                                <label>Пароль</label>
 
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password">
+                                <div>
+                                    <input type="password" name="password">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Подтверждение пароля</label>
+                            <div>
+                                <label>Подтверждение пароля</label>
 
-                                <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password_confirmation">
+                                <div>
+                                    <input type="password" name="password_confirmation">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                            <div>
+                                <div>
+                                    <button type="submit" class="button">
                                         Сбросить пароль
                                     </button>
                                 </div>
                             </div>
                         </form>
 
-                    </div>
+                    </article>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 @endsection

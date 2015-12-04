@@ -2,18 +2,24 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row">
+        <!-- Main Wrapper -->
+<div id="main-wrapper">
+    <div class="wrapper style1">
+        <div class="inner">
+            <div class="container">
+                <div id="content">
 
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Сообщения</div>
-                    <div class="panel-body" style="padding:10px 40px;">
+                    <!-- Content -->
 
-                        {!! Form::open(array('class' => 'form-horizontal')) !!}
-
+                    <article>
+                        <header class="major">
+                            <h2>Сообщения</h2>
+                        </header>
 
                         @include('errors.error')
+
+                        {!! Form::open() !!}
+
 
                         @if (count($messages) == 0)
 
@@ -25,7 +31,7 @@
                                 @foreach($messages as $message)
                                     <tr class="{{($message->read != 0 || $message->getReceiver->id != $id)?  "" : "success"}}">
                                         @if ($message->getSender->id == $id)
-                                            <td><a href="/user/{{$message->getReceiver->id}}"><img
+                                            <td style="text-align: right; border-right-color: white;"><a href="/user/{{$message->getReceiver->id}}"><img
                                                             src="/api/getImage/{{$message->getReceiver->id}}-50x50.jpg"
                                                             alt="Фото профиля"></a>
                                             <td style="text-align: center">
@@ -54,12 +60,13 @@
                         @endif
 
                         {!! Form::close() !!}
+                    </article>
 
-                    </div>
                 </div>
             </div>
-
         </div>
+
     </div>
+</div>
 
 @endsection
