@@ -158,13 +158,29 @@ class ProfilesController extends Controller
         return view()->make('user.dialog', array('messages' => $msgs, 'id' => $id, 'dialog_with' => $dialog_with));
     }
 
-    public function sendMessage(Request $request, $dialog)
+    public function sendMessage(Request $request)
     {
+        $this->validate($request,
+            array('messageArea' => 'required'),
+            array(
+                'messageArea.required' => 'Сообщение не должно быть пустым'
+            ));
+
         $msg = [];
         $msg ['message'] = $request->input('messageArea');
         $msg ['user_id_sent'] = $request->user()->id;
         $msg ['user_id_received'] = $request->input('userHidden');
-        $msg ['dialog_num'] = $dialog;
+        $ids = [$msg['user_id_sent'], $msg['user_id_received']];
+        $b = $msg['user_id_sent'] == $msg['user_id_received'];
+        if ($b)
+            $res = Messages::whereIn('user_id_sent', $ids)->whereIn('user_id_received', $ids)->first();
+        else
+            $res = Messages::whereIn('user_id_sent', $ids)->whereIn('user_id_received', $ids)->whereRaw('user_id_received <> user_id_sent')->first();
+
+        if (count($res) == 0)
+            $msg['dialog_num'] = Messages::orderBy('dialog_num', 'DESC')->first()->dialog_num + 1;
+        else
+            $msg['dialog_num'] = $res->dialog_num;
         Messages::create($msg);
         return redirect()->back();
     }
@@ -187,8 +203,8 @@ class ProfilesController extends Controller
         $client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/google_calendar_callback');
         $credentialsPath = $this->expandHomeDirectory(CREDENTIALS_PATH);
 
-        $request->session()->put('dialog',$dialog);
-        $request->session()->put('seance',$id);
+        $request->session()->put('dialog', $dialog);
+        $request->session()->put('seance', $id);
 
         // Request authorization from the user.
         if (file_exists($credentialsPath)) {

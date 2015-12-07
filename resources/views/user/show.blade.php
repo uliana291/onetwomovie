@@ -107,7 +107,7 @@
                         @if($user->id <> request()->user()->id)
 
                             <div>
-                                <input type="button" class="button"
+                                <input type="button" class="button openModal"
                                        value="Написать сообщение" data-id="{{$user->id}}"/>
                             </div>
                         @endif
@@ -139,7 +139,7 @@
                     <h4 class="modal-title" id="myModalLabel">Отправить</h4>
                 </div>
                 <div class="modal-body">
-                    <textarea name="textArea" class="form-control textAreaModal" style="height: 250px"></textarea>
+                    <textarea name="messageArea" class="form-control messageArea" style="height: 250px"></textarea>
                     <input name="userHidden" class="userHidden" type="hidden">
                 </div>
                 <div class="modal-footer">
@@ -156,25 +156,25 @@
             $('.openModal').click(function () {
                 var dataId = $(this).attr('data-id');
 
-                $.ajax({
-                    type: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    url: "/api/getMessage",
-                    async: true,
-                    cache: false,
-                    dataType: "json",
-                    data: {user_id: dataId},
-                    success: function (data) {
-                        $('.textAreaModal').val(data.message);
-                        $('.userHidden').val(dataId);
-                        $('#myModal').modal('show');
-                    },
-                    error: function (data) {
-
-                    }
-                });
+                $('#myModal').modal('show');
+//                $.ajax({
+//                    type: 'POST',
+//                    headers: {
+//                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//                    },
+//                    async: true,
+//                    cache: false,
+//                    dataType: "json",
+//                    data: {user_id: dataId},
+//                    success: function (data) {
+//                        $('.textAreaModal').val(data.message);
+//                        $('.userHidden').val(dataId);
+//                        $('#myModal').modal('show');
+//                    },
+//                    error: function (data) {
+//
+//                    }
+//                });
             })
         });
     </script>

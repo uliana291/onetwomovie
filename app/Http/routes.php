@@ -18,7 +18,7 @@ Route::group(['middleware' => 'before'], function () {
     Route::get('/', function () {
 
         if (Auth::check())
-            redirect()->route('search_user');
+            return redirect()->route('search_user');
         else
             return view('auth.login');
     });
