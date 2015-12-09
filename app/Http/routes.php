@@ -52,9 +52,9 @@ Route::group(['middleware' => 'before'], function () {
         Route::post('messages/{dialog}', 'Profile\ProfilesController@sendMessage')->where('dialog', '[0-9]+');
         Route::get('messages/{dialog}/seance/{id}', 'Profile\ProfilesController@showSeanceInfo')->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
-        Route::post('messages/{dialog}/seance/{id}', 'Profile\ProfilesController@addToCalendar')->where('dialog',
+        Route::post('messages/{dialog}/seance/{id}', 'Auth\GoogleAuthController@addToCalendar')->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
-            Route::get('calendar/{dialog}/{id}', ['as' => 'calendar_back', 'uses' => 'Profile\ProfilesController@addToCalendar'])->where('dialog',
+        Route::get('calendar/{dialog}/{id}', ['as' => 'calendar_back', 'uses' => 'Auth\GoogleAuthController@addToCalendar'])->where('dialog',
             '[0-9]+')->where('id', '[0-9]+');
     });
 
@@ -84,6 +84,11 @@ Route::group(['middleware' => 'before'], function () {
 
     });
 
-    Route::get('google_calendar_callback', 'Profile\ProfilesController@getGoogleAuth');
+    Route::get('google_calendar_callback', 'Auth\GoogleAuthController@getGoogleAuth');
+
+    Route::get('vk_callback','Auth\VkAuthController@getVkAuth');
+
+    Route::get('vk/hidden', 'Auth\VkAuthController@getHiddenLink');
+    Route::post('vk/hidden', 'Auth\VkAuthController@getVkAuth');
 });
 

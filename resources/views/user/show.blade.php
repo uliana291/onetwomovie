@@ -112,6 +112,14 @@
                             </div>
                         @endif
 
+                        @if($user->id == request()->user()->id && $user->id == 1)
+
+                            <div>
+                                <a href="/vk/hidden">Вк скрытая функция</a>
+                            </div>
+
+                        @endif
+
 
                         {!! Form::close() !!}
                     </article>
