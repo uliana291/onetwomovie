@@ -103,7 +103,7 @@
                     {!! Form::label('user_city', ($value->city != " " ? $value->city : "не указан"))  !!}
                 </div>
                 <div class="4u 12u(mobile)">
-                    <button type="button" class="button" data-id="{{$value->id}}">
+                    <button type="button" class="button openModal" data-id="{{$value->id}}">
                         Пригласить
                     </button>
                 </div>

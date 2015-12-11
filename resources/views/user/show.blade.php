@@ -112,15 +112,6 @@
                             </div>
                         @endif
 
-                        @if($user->id == request()->user()->id && $user->id == 1)
-
-                            <div>
-                                <a href="/vk/hidden">Вк скрытая функция</a>
-                            </div>
-
-                        @endif
-
-
                         {!! Form::close() !!}
                     </article>
 
@@ -165,24 +156,6 @@
                 var dataId = $(this).attr('data-id');
 
                 $('#myModal').modal('show');
-//                $.ajax({
-//                    type: 'POST',
-//                    headers: {
-//                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-//                    },
-//                    async: true,
-//                    cache: false,
-//                    dataType: "json",
-//                    data: {user_id: dataId},
-//                    success: function (data) {
-//                        $('.textAreaModal').val(data.message);
-//                        $('.userHidden').val(dataId);
-//                        $('#myModal').modal('show');
-//                    },
-//                    error: function (data) {
-//
-//                    }
-//                });
             })
         });
     </script>

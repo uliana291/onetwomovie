@@ -15,7 +15,6 @@ use Image;
 use Illuminate\Support\Facades\DB;
 
 
-
 class ProfilesController extends Controller
 {
 
@@ -167,7 +166,10 @@ class ProfilesController extends Controller
             $res = Messages::whereIn('user_id_sent', $ids)->whereIn('user_id_received', $ids)->whereRaw('user_id_received <> user_id_sent')->first();
 
         if (count($res) == 0)
-            $msg['dialog_num'] = Messages::orderBy('dialog_num', 'DESC')->first()->dialog_num + 1;
+            if (Messages::count() <> 0)
+                $msg['dialog_num'] = Messages::orderBy('dialog_num', 'DESC')->first()->dialog_num + 1;
+            else
+                $msg['dialog_num'] = 1;
         else
             $msg['dialog_num'] = $res->dialog_num;
         Messages::create($msg);
