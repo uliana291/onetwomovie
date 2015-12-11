@@ -68,7 +68,7 @@
                     <a id="user_name" href="/user/{{$value->id}}" class="control-label">{{$value->name}}</a>
                 </div>
                 <div class="1u 12u(mobile)">
-                    <img src="/api/getImage/{{$value->id}}-50x50.jpg" alt="Фото профиля">
+                    <img src="/api/getImage/{{$value->id}}-50x50" alt="Фото профиля">
                 </div>
                 <div class="1u 12u(mobile)">
                     {!! Form::label('user_gender', ($value->gender == 'female'? 'Ж' : 'М'))  !!}
@@ -91,7 +91,7 @@
                     <a id="user_name" href="/user/{{$value->id}}" class="control-label">{{$value->name}}</a>
                 </div>
                 <div class="1u 12u(mobile)">
-                    <img src="/api/getImage/{{$value->id}}-50x50.jpg" alt="Фото профиля">
+                    <img src="/api/getImage/{{$value->id}}-50x50" alt="Фото профиля">
                 </div>
                 <div class="1u 12u(mobile)">
                     {!! Form::label('user_gender', ($value->gender == 'female'? 'Ж' : 'М'))  !!}

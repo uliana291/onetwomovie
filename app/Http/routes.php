@@ -62,11 +62,10 @@ Route::group(['middleware' => 'before'], function () {
 
         Route::get('getSt{type}', 'ApiController@getStaticValues')->where('type', 'Cities|Genres');
         Route::get('get{type}', 'ApiController@getDynamicValues')->where('type', 'Cinemas|Seances|Movies');
-        Route::get('getImage/{id}-{width}x{height}.jpg', 'ApiController@getImage')->where('id', '[0-9]+');
+        Route::get('getImage/{id}-{width}x{height}', 'ApiController@getImage')->where('id', '[0-9]+');
         Route::get('getPoster/{filePoster}', 'ApiController@getPoster');
         Route::post('getMessage', 'ApiController@getMessage');
     });
-
 
     Route::controllers([
         'password' => 'Auth\PasswordController',

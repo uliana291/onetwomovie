@@ -32,7 +32,7 @@
                                     <tr class="{{($message->read != 0 || $message->getReceiver->id != $id)?  "" : "success"}}">
                                         @if ($message->getSender->id == $id)
                                             <td style="text-align: right; border-right-color: white;"><a href="/user/{{$message->getReceiver->id}}"><img
-                                                            src="/api/getImage/{{$message->getReceiver->id}}-50x50.jpg"
+                                                            src="/api/getImage/{{$message->getReceiver->id}}-50x50"
                                                             alt="Фото профиля"></a>
                                             <td style="text-align: center">
                                                 <a href="/user/{{$message->getReceiver->id}}">{{$message->getReceiver->name . " " . $message->getReceiver->last_name}}</a>
@@ -41,7 +41,7 @@
                                             </td>
                                         @else
                                             <td><a href="/user/{{$message->getSender->id}}"><img
-                                                            src="/api/getImage/{{$message->getSender->id}}-50x50.jpg"
+                                                            src="/api/getImage/{{$message->getSender->id}}-50x50"
                                                             alt="Фото профиля"></a>
                                             <td style="text-align: center">
                                                 <a href="/user/{{$message->getSender->id}}">{{$message->getSender->name . " " . $message->getSender->last_name}}</a>

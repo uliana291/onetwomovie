@@ -32,7 +32,7 @@
                             <div class="row" style="margin-top: 5px">
                                 <div class="2u 12u(mobile)" style="text-align: right; ">
                                     <a href="/user/{{$message->getSender->id}}"><img
-                                                src="/api/getImage/{{$message->getSender->id}}-50x50.jpg"
+                                                src="/api/getImage/{{$message->getSender->id}}-50x50"
                                                 alt="Фото профиля"></a>
                                 </div>
                                 <div class="8u 12u(mobile)" style="text-align: left">
@@ -66,7 +66,7 @@
                             <div>
                                 <div class="row" style="margin-left: 100px;">
                                     <div style="text-align: right" class="2u 12u(mobile)">
-                                        <img src="/api/getImage/{{$id}}-50x50.jpg"
+                                        <img src="/api/getImage/{{$id}}-50x50"
                                              alt="Фото профиля">
                                     </div>
 
@@ -79,7 +79,7 @@
 
                                     <div class="1u 12u(mobile)">
                                         <a href="/user/{{$dialog_with->id}}"><img
-                                                    src="/api/getImage/{{$dialog_with->id}}-50x50.jpg"
+                                                    src="/api/getImage/{{$dialog_with->id}}-50x50"
                                                     alt="Фото профиля"></a>
                                     </div>
                                 </div>
