@@ -105,7 +105,6 @@
                         @endif
                         <hr>
                         @if($user->id <> request()->user()->id)
-
                             <div>
                                 <input type="button" class="button openModal"
                                        value="Написать сообщение" data-id="{{$user->id}}"/>
@@ -154,8 +153,10 @@
         $(document).ready(function () {
             $('.openModal').click(function () {
                 var dataId = $(this).attr('data-id');
+                $('.userHidden').val(dataId);
 
                 $('#myModal').modal('show');
+
             })
         });
     </script>
