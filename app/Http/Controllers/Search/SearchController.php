@@ -63,10 +63,11 @@ class SearchController extends Controller
         }
 
         foreach ($users as $key => $user) {
-            if ($user->ava <> null) {
+            if ($user->ava <> 'noava.jpeg') {
                 $img = $user->ava;
                 $users[$key]->ava = '/upload/' . $img;
-            }
+            } else
+                $users[$key]->ava = '/images/noava.jpeg';
 
             $age = Helper::ageCalculator($user->birth_date);
             $users[$key]->age = ($age == null ? " " : $age);
@@ -78,8 +79,8 @@ class SearchController extends Controller
 
 
         return view()->make('search.user_filter', array('users' => $users, 'cityList' => $cityList, 'city_id' => $city_id,
-            'age_from' => ($request->input('age_from')? $request->input('age_from') : 0),
-            'age_to' => ($request->input('age_to')? $request->input('age_to') : 0),
+            'age_from' => ($request->input('age_from') ? $request->input('age_from') : 0),
+            'age_to' => ($request->input('age_to') ? $request->input('age_to') : 0),
             'gender' => $request->input('gender'),
             'id' => $id));
 
@@ -159,6 +160,7 @@ class SearchController extends Controller
         }
 
         $poster = json_decode($movie->poster)->name;
+
         $movie->poster = $poster;
 
 

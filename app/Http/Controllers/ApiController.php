@@ -36,9 +36,7 @@ class ApiController extends Controller
 
     public static function getPoster($link, $width = 200, $height = 0)
     {
-
         if (file_exists(base_path() . '/public/upload/' . $link)) {
-
             $img = Image::make(base_path() . '/public/upload/' . $link);
 
         } else {
@@ -51,6 +49,7 @@ class ApiController extends Controller
             });
 
             $img->save(base_path() . '/public/upload/' . $original_name);
+
         }
 
         $response = response()->make($img->encode('jpg'));

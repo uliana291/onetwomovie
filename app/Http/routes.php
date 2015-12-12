@@ -84,10 +84,5 @@ Route::group(['middleware' => 'before'], function () {
     });
 
     Route::get('google_calendar_callback', 'Auth\GoogleAuthController@getGoogleAuth');
-
-    Route::get('vk_callback','Auth\VkAuthController@getVkAuth');
-
-    Route::get('vk/hidden', 'Auth\VkAuthController@getHiddenLink');
-    Route::post('vk/hidden', 'Auth\VkAuthController@getVkAuth');
 });
 

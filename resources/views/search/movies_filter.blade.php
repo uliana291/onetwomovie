@@ -1,4 +1,4 @@
-@extends('search.search_f')
+    @extends('search.search_f')
 
 @section('filter')
 

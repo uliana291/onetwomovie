@@ -39,10 +39,11 @@ class ProfilesController extends Controller
                 $user->age = Helper::ageCalculator($user->birth_date);
 
 
-            if ($user->ava <> null) {
+            if ($user->ava <> 'noava.jpeg') {
                 $img = $user->ava;
                 $user->ava = '/upload/' . $img;
-            }
+            } else
+                $user->ava = '/images/noava.jpeg';
 
             if ($user->id == $request->user()->id)
                 $user->self = true;
