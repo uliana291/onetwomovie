@@ -40,7 +40,7 @@
                                                 <div>{{$message->created_at}}</div>
                                             </td>
                                         @else
-                                            <td><a href="/user/{{$message->getSender->id}}"><img
+                                            <td style="text-align: right; border-right-color: white;"><a href="/user/{{$message->getSender->id}}"><img
                                                             src="/api/getImage/{{$message->getSender->id}}-50x50"
                                                             alt="Фото профиля"></a>
                                             <td style="text-align: center">

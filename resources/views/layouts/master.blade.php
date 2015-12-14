@@ -47,7 +47,7 @@
                             @endif
                             @if ( Auth::check())
                                 <li><a href="/user/messages">Сообщения @if ($unread <> 0)
-                                            <div class="current_page_item">{{ $unread }}</div> @endif</a></li>
+                                            <span class="current_page_item">{{ '(' . $unread . ')' }}</span> @endif</a></li>
                             @endif
                             @if ( Auth::check())
                                 <li><a href="/search/users">Поиск</a></li>
