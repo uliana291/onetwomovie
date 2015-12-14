@@ -9,8 +9,10 @@
                     <div id="content">
                         <article class="box excerpt">
                             <header class="major">
-                                <h2><a style="text-align: right" href="/search/users">Поиск пользователей</a>
-                                    | Поиск фильмов</h2>
+                                <h2> Поиск фильмов
+                                    <a style="font-size: 15px; margin-left:600px"  class="button" href="/search/users">Поиск
+                                        пользователей</a>
+                                </h2>
                             </header>
 
 
