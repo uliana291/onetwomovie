@@ -21,8 +21,10 @@ class ApiController extends Controller
     {
         $user = User::find($id);
 
-
-        $img = Image::make(public_path("upload/" . $user->ava));
+        if ($user->ava == 'noava.jpeg')
+            $img = Image::make(public_path("images/" . $user->ava));
+        else
+            $img = Image::make(public_path("upload/" . $user->ava));
 
         $img->resize($width, null, function ($constraint) {
             $constraint->aspectRatio();
