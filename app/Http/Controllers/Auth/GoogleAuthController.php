@@ -30,7 +30,6 @@ class GoogleAuthController extends Controller
 
     public function addToCalendar(Request $request, $dialog, $id)
     {
-
         $client = new Google_Client();
         $client->setScopes(SCOPES);
         $client->setAuthConfigFile(CLIENT_SECRET_PATH);

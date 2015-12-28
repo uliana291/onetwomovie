@@ -8,13 +8,13 @@
     @include('errors.error')
 
     <div class="row">
-        <div class="1u 12u(mobile)" style="text-align: right; ">
+        <div class="1u 2u(mobile)" style="text-align: right; ">
             {!!  Form::label('city_id', 'Город') !!}
         </div>
-        <div class="3u 12u(mobile)">
+        <div class="3u 2u(mobile)">
             {!!  Form::select('city_id', $cityList , $city) !!}
         </div>
-        <div class="8u 12u(mobile)">
+        <div class="8u 8u(mobile)">
         </div>
     </div>
 
@@ -28,16 +28,16 @@
             <hr>
 
             <div class="row">
-                <div class="4u 12u(mobile)" style="text-align: left; ">
+                <div class="4u 5u(mobile)" style="text-align: left; ">
                     <label>{!! link_to("/search/movie/".$value['id'], $value['title'])  !!}</label>
                     <div>
                         <img src="/api/getPoster/{{$value['poster']}}" alt="Постер">
                     </div>
                 </div>
-                <div class="1u 12u(mobile)" style="text-align: center">
+                <div class="1u 5u(mobile)" style="text-align: center">
                     {!! Form::label('age_restriction', $value['age_restriction'])  !!}
                 </div>
-                <div class="7u 12u(mobile)">
+                <div class="7u 2u(mobile)">
                     <label>{!! link_to("/search/movie/".$value['id']."/cinemas/".$city, "Хочу пойти..")  !!}</label>
                 </div>
             </div>

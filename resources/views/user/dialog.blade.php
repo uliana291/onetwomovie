@@ -63,27 +63,27 @@
                     <div class="12u 12u(mobile)">
 
                         <section>
-                            <div>
-                                <div class="row" style="margin-left: 100px;">
-                                    <div style="text-align: right" class="2u 12u(mobile)">
-                                        <img src="/api/getImage/{{$id}}-50x50"
-                                             alt="Фото профиля">
-                                    </div>
+
+                            <div class="row">
+                                <div style="text-align: right" class="3u mobile-hide">
+                                    <img src="/api/getImage/{{$id}}-50x50"
+                                         alt="Фото профиля">
+                                </div>
 
 
-                                    <div class="9u 12u(mobile)">
+                                <div class="8u">
                                     <textarea id="messageArea" name="messageArea" class="form-control"
-                                              style="width: 600px; height: 70px; resize: none                                                                      "
+                                              style="width: 400px; height: 70px; resize: none"
                                               placeholder="Введите свое сообщение..."></textarea>
-                                    </div>
+                                </div>
 
-                                    <div class="1u 12u(mobile)">
-                                        <a href="/user/{{$dialog_with->id}}"><img
-                                                    src="/api/getImage/{{$dialog_with->id}}-50x50"
-                                                    alt="Фото профиля"></a>
-                                    </div>
+                                <div class="1u mobile-hide" style="text-align: right">
+                                    <a href="/user/{{$dialog_with->id}}"><img
+                                                src="/api/getImage/{{$dialog_with->id}}-50x50"
+                                                alt="Фото профиля"></a>
                                 </div>
                             </div>
+
                             <div>
                                 <button type="submit" class="button"
                                         style="margin-right: 55px;  margin-top: 10px; float: right">
@@ -107,9 +107,9 @@
 @endsection
 
 @section('script')
-@parent
+    @parent
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#dialogDiv").scrollTop($("#dialogDiv")[0].scrollHeight);
         });
     </script>

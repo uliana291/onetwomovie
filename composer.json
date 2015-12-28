@@ -11,7 +11,8 @@
         "intervention/image": "^2.3",
         "barryvdh/laravel-debugbar": "^2.0",
         "google/apiclient":"1.*",
-        "davejamesmiller/laravel-breadcrumbs": "^3.0"
+        "davejamesmiller/laravel-breadcrumbs": "^3.0",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

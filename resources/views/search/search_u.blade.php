@@ -10,7 +10,7 @@
                         <article class="box excerpt">
                             <header class="major">
                                 <h2> Поиск пользователей
-                                    <a style="font-size: 15px; margin-left:550px" class="button" href="/search/movies">Поиск
+                                    <a style="font-size: 15px;" class="button" href="/search/movies">Поиск
                                         фильмов</a>
                                 </h2>
                             </header>

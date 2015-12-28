@@ -114,6 +114,9 @@ return [
     |
     */
     'attributes' => [
-        //
+        'name' => '"имя"',
+        'password' => '"пароль"',
+        'birth_date' => '"дата рождения"',
+        'last_name' => '"фамилия"'
     ],
 ];

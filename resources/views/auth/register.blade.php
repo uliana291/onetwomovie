@@ -19,62 +19,52 @@
 
                         @include('errors.error')
 
-                        <form role="form" method="POST" action="/auth/register">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                        {!! Form::open() !!}
+                        {!! Form::token() !!}
+                        <div>
+                            <label>Имя</label>
 
                             <div>
-                                <label>Имя</label>
-
-                                <div>
-                                    <input style="width:370px;" type="text" name="name"
-                                           value="{{ old('name') }}">
-                                </div>
+                                <input style="width:370px;" type="text" name="name"
+                                       value="{{ old('name') }}">
                             </div>
+                        </div>
+
+                        <div>
+                            <label>Email</label>
 
                             <div>
-                                <label>Email</label>
-
-                                <div>
-                                    <input style="width:370px;" type="email" name="email"
-                                           value="{{ old('email') }}">
-                                </div>
+                                <input style="width:370px;" type="email" name="email"
+                                       value="{{ old('email') }}">
                             </div>
+                        </div>
+
+                        <div>
+                            <label>Пароль</label>
 
                             <div>
-                                <label>Пол</label>
-                                <div>
-                                    <select id="gender" name="gender">
-                                        <option value="male">М</option>
-                                        <option value="female">Ж</option>
-                                    </select>
-                                </div>
+                                <input style="width:370px;" type="password" name="password">
                             </div>
+                        </div>
+
+                        <div>
+                            <label>Подтверждение пароля</label>
 
                             <div>
-                                <label>Пароль</label>
-
-                                <div>
-                                    <input style="width:370px;" type="password" name="password">
-                                </div>
+                                <input style="width:370px;" type="password"
+                                       name="password_confirmation">
                             </div>
+                        </div>
 
+                        <div>
                             <div>
-                                <label>Подтверждение пароля</label>
-
-                                <div>
-                                    <input style="width:370px;" type="password"
-                                           name="password_confirmation">
-                                </div>
+                                <button type="submit" class="button"
+                                        style="margin-right: 15px; margin-top: 15px">
+                                    Зарегистрироваться
+                                </button>
                             </div>
-
-                            <div>
-                                <div>
-                                    <button type="submit" class="button"
-                                            style="margin-right: 15px; margin-top: 15px">
-                                        Зарегистрироваться
-                                    </button>
-                                </div>
-                            </div>
+                        </div>
                         </form>
                     </article>
 
